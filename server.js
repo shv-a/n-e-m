@@ -7,10 +7,10 @@ const port           = 8000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-MongoClient.connect(db.url, (err, database) => {
-    if (err) return console.log(err);
+MongoClient.connect(db.url2, (err, database) => {
+    if (err) return console.log('===error===', err);
 
-    const db = database.db('admin');
+    const db = database.db('notes');
     require('./app/routes')(app, db);
 
     app.listen(port, () => {
