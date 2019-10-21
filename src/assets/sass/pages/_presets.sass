@@ -1,0 +1,281 @@
+.preset
+  width: 1000px
+  height: 1000px
+  position: relative
+  margin: 10px 0 10px
+  border: 2px solid transparent
+  cursor: pointer
+
+  &_nm
+    margin: 0
+
+  &__click-zone
+    width: 100%
+    height: 100%
+    position: absolute
+    left: 0
+    top: 0
+    pointer-events: none
+    cursor: pointer
+
+  &.moving
+    border: 2px solid red
+
+    .preset__click-zone
+      pointer-events: all
+      z-index: 5700
+
+  &__table
+    min-height: 69px
+    min-width: 69px
+    background-color: lightgreen
+    border: 1px solid #666
+    position: absolute
+    z-index: 500
+    user-select: none
+    padding-left: 2px
+    cursor: pointer
+
+    &.selected
+      border: 1px solid #aaa
+      z-index: 900
+
+    &.additional
+      border: 1px solid seagreen
+      z-index: 520
+      box-shadow: 0 0 2px 2px rgba(46,139,87, .3)
+
+    &.busy
+      background-color: yellow
+
+    &.draft
+      background-color: lightgreen
+      animation: editing 2s 4s linear infinite
+
+    &.booked
+      background-color: lightgrey
+
+    &.booked.expired:not(.busy)
+      background-color: lightgrey
+      animation: expired 2s 4s linear infinite
+
+    &:not(.group)
+      box-shadow: none !important
+
+
+    & > .table-content
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      overflow: hidden
+      overflow-y: auto
+
+
+    .text-wrapper
+      overflow: hidden
+      overflow-y: auto
+      position: absolute
+      top: 0
+      left: 2px
+      right: -34px
+      bottom: 0
+      padding-right: 17px
+      +mr(1400)
+        padding-right: 2px
+
+    &-reserve
+      padding: 4px 0
+      &:not(:last-child)
+        border-bottom: 1px solid rgba(0,0,0,.3)
+
+      &-text
+        font-size: 11px
+        line-height: 1
+
+      &-options
+        position: absolute
+        left: 0
+        top: 0
+        bottom: 0
+        right: 0
+        .option
+          position: absolute
+          height: 20px
+          width: 20px
+          font-size: 10px
+          line-height: 18px
+          text-align: center
+          border-radius: 50%
+          border: 1px solid #666
+          &.po
+            background: yellow
+            top: -10px
+            right: 10px
+          &.ps
+            color: #fff
+            background: red
+            top: 10px
+            right: -10px
+          &.pz
+            color: #fff
+            background: blue
+            top: -10px
+            right: -10px
+
+    .name
+      word-break: break-all
+      display: inline-block
+      font-size: 18px
+      line-height: 20px
+
+      &.abs
+        position: absolute
+        top: 2px
+        left: 0
+
+    .seats
+      font-size: 9px
+
+  .menu
+    position: absolute
+    top: 50%
+    left: 50%
+    background: #fff
+    border-radius: 12px
+    border: 2px solid #aaa
+    cursor: pointer
+    z-index: 700
+    &_btlr
+      border-top-left-radius: 0
+    &__option
+      padding: 10px 15px
+      display: inline-block
+      white-space: nowrap
+  &__checkbox
+    align-items: center
+    display: flex
+    margin-bottom: 24px
+    input
+      width: 18px
+      height: 18px
+      margin: 0 15px 0 0
+    label
+      margin: 0
+  &__add-table,
+  &__delete-table
+    z-index: 950
+    position: fixed
+    width: 80%
+    left: 10%
+    top: 30%
+    background: #fff
+    border: 4px solid #ccc
+    padding: 15px
+    border-radius: 15px
+
+    .close
+      position: absolute
+      right: 5px
+      top: 5px
+      color: #000
+      font-size: 28px
+      padding: 10px
+
+    .btn
+      margin-top: 20px
+
+    .tables-dropdown
+      margin-top: 30px
+
+.moving-message
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  height: 100px
+  z-index: 6000
+  background: rgba(220, 53, 69, .7)
+  color: #fff
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 25px
+
+  .btn
+    border: 1px solid #fff
+
+.coordinates
+  position: fixed
+  background: #fff
+  right: 0
+  top: 100px
+  margin-left: 10px
+  z-index: 5800
+  border: 1px solid #ccc
+  border-bottom-left-radius: 25px
+  border-top-left-radius: 25px
+  padding: 10px
+  &__row
+    display: flex
+    align-items: center
+    padding: 6px
+    label
+      margin: 1px 5px 0 0
+    input
+      width: 60px
+      padding: 4px
+  &__save
+    height: 40px
+    width: 40px
+    line-height: 40px
+    font-size: 20px
+    text-align: center
+    color: #fff
+    background: #87CB16
+    border-radius: 20px
+    margin: 10px auto 0
+    cursor: pointer
+
+
+.moving
+  .preset__table
+    pointer-events: none
+    .coordinates
+      pointer-events: all
+    &.movable
+      z-index: 5800
+
+.table-presets,
+.table-presets-for-date
+  .preset__table
+    .name
+      text-shadow: 0 0 4px #fff, 0 0 4px #fff
+
+
+.get-data-param-select
+  display: flex
+  justify-content: space-between
+  align-items: center
+  .label
+    color: #000
+    font-size: 13px
+  
+@keyframes editing
+  from 
+    background-color: lightgreen
+  50%
+    background-color: gray
+  to 
+    background-color: lightgreen
+
+
+
+@keyframes expired
+  from
+    background-color: lightgrey
+  50%
+    background-color: yellow
+  to
+    background-color: lightgrey

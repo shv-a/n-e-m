@@ -1,0 +1,281 @@
+.book
+  position: relative
+  padding-top: 5px
+  &__controls
+    position: absolute
+    top: 0
+    left: 0
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    .switch-tables-mode
+      color: #000
+      display: flex
+      align-items: center
+      height: 30px
+      background: lightgrey
+      border-radius: 25px
+      padding: 15px 20px 12px
+      & > label
+        height: 30px
+        line-height: 30px
+      input
+        margin: -4px 0 0 10px
+    .fullscreen-mode
+      margin: 0 14px
+      height: 30px
+      font-weight: bold
+      background: lightgrey
+      border-radius: 25px
+      line-height: 30px
+      padding: 0 15px
+      i
+        margin: 0 0 0 6px
+.booking
+  &__wrap
+    padding-top: 10px
+    max-width: 100%
+    width: 100%
+    display: flex
+    justify-content: space-between
+  &__left
+    display: flex
+    justify-content: space-between
+    flex-wrap: nowrap
+
+    & > .site-input
+      margin-right: 10px
+
+  &__center
+    width: 100%
+    min-width: 120px
+    padding-right: 10px
+  &__right
+    max-width: 30%
+    width: 100%
+  &__bottom
+    width: 100%
+    display: flex
+    justify-content: flex-start
+    align-items: center
+  &__event
+    max-width: 100%
+    width: 100%
+    display: flex
+    &-img
+      width: 100%
+      max-width: 150px
+      margin-right: 15px
+      img
+        display: block
+        width: 100%
+        object-fit: cover
+    &-title
+      margin-bottom: 8px
+      h3
+        font-size: 16px
+    &-subtitle
+      margin-bottom: 12px
+      font-weight: 400
+      font-size: 18px
+    &-description
+      margin-bottom: 8px
+    &-params
+      h4
+        font-size: 1.6rem
+        margin-bottom: 8px
+      span
+        font-weight: 600
+        font-size: 1.8rem
+
+  &__comment
+    margin: 0 15px
+    padding: 24px 0
+    min-width: 100px
+    line-height: 14px
+    i
+      display: inline-block
+      padding: 10px
+    textarea
+      resize: none
+      width: 200px
+      height: 100px
+      display: block
+      margin-bottom: 16px
+  &__reserve
+    display: flex
+    &-tables
+      display: flex
+      align-items: center
+      justify-content: space-between
+      .fas
+        font-size: 24px
+        color: #00aa06
+        margin: 25px 0 0 5px
+        padding: 10px 0 10px 10px
+        cursor: pointer
+      &-add
+        .fas
+          color: #00aa06
+      &-cancel
+        .fas
+          color: #DC3545
+  &__reserve2
+    justify-content: space-between
+    .site-input
+      max-width: 32%
+  &__overbookReserves
+    width: 100%
+    height: 81px
+    min-width: 160px
+    overflow: auto
+    border: 1px solid #ccc
+    margin: 10px
+    .overbooking-container
+      min-width: 100%
+      height: 79px
+      display: flex
+      flex-wrap: nowrap
+      .preset__table
+        position: relative
+        height: 69px
+        width: 69px
+        margin: 5px
+
+
+.booking-menu-wrapper
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background: rgba(0,0,0,.3)
+  z-index: 2400
+  .booking-menu
+    position: relative
+    width: 100%
+    height: 100%
+    &__body
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      background: #fff
+      border: 2px solid #cccccc
+      border-radius: 20px
+      padding: 20px
+
+      .menu-section
+        border-top: 1px solid #000
+        margin-top: 10px
+        padding: 10px 0 0
+      .reserve
+        padding: 10px
+        border-bottom: 1px solid #cccccc
+
+        .btn_primary,
+        .btn_danger
+          padding: 8px 12px
+          margin: 10px 10px 0 0
+
+      .btn_success,
+      .btn_pale
+        padding: 8px 12px
+        display: block
+        margin: 10px auto
+
+      .btn[disabled]
+        opacity: .5
+.booking
+  .modal
+    z-index: 2500
+.mx-datepicker-popup
+  z-index: 4400
+
+.book.client
+  .preset__table
+    border: 1px solid transparent
+    background-color: transparent
+    animation: none
+    min-width: 30px
+    min-height: 30px
+    div
+      overflow: visible
+    .name, .seats
+      position: relative
+      top: -20px
+      left: -10px
+      text-shadow: 0 0 4px #fff, 0 0 4px #fff
+  .preset__table-reserve
+    display: none
+  .preset__table-reserve-options
+    display: none
+
+.client
+  &_info
+    position: relative
+    background: #d3d3d375
+    padding: 15px
+    border-radius: 5px
+    p
+      font-size: 17px
+    span
+      font-weight: 700
+    &-btn
+      position: absolute
+      font-size: 19px
+      right: 15px
+      top: 50%
+      transform: translateY(-50%)
+  &_multiselect
+    display: flex
+    align-items: center
+    .multiselect__tags
+      margin-top: 0
+    .fa, .fas
+      font-size: 20px
+      color: #00aa06
+      margin-left: 15px
+  &_btn-create
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    text-align: right
+    font-weight: 600
+    cursor: pointer
+    .fa, .fas
+      font-size: 24px
+      color: #00aa06
+      margin-left: 15px
+
+.reserve
+  &__order
+    margin-left: auto
+    max-width: 320px
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-bottom: 12px
+    span
+      cursor: pointer
+      display: block
+      padding: 15px
+      border: 2px solid #0f6674
+      border-radius: 5px
+  &__active
+    background: #0f6674
+    color: white
+  &__top
+    display: flex
+    justify-content: space-between
+  &__select
+    max-width: 300px
+    width: 100%
+
+.booking-fullscreen
+  .booking > .section__title,
+  .booking__wrap
+    display: none
+  .book
+    padding-top: 0
