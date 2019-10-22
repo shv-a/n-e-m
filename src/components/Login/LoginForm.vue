@@ -3,26 +3,55 @@
         <v-container class="fill-height" fluid>
 
             <v-layout align-center justify-center>
-                <v-form ref="form" v-model="valid" :lazy-validation="true">
+                <v-form ref="form" v-model="valid" :lazy-validation="false" v-if="formType === 'login'">
+<!--                    <v-text-field v-model="name" :counter="64" :rules="nameRules" label="Name" required></v-text-field>-->
+                    <v-text-field v-model="email" :rules="emailRules" label="E-mail" :type="'email'" required></v-text-field>
+                    <v-text-field v-model="password" :rules="passwordRules" label="Password" :type="'password'" autocomplete="off" required></v-text-field>
+
+<!--                    <v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required></v-select>-->
+
+                    <v-checkbox v-model="checkbox" label="Remember me"></v-checkbox>
+
+                    <v-btn :disabled="!valid" color="success" class="mr-4" @click="login">
+                        Login
+                    </v-btn>
+
+                    <v-btn color="primary" class="mr-4" @click="switchFormTo('signup')">
+                        Sign Up
+                    </v-btn>
+
+<!--                    <v-btn color="error" class="mr-4" @click="reset">-->
+<!--                        Reset Form-->
+<!--                    </v-btn>-->
+
+<!--                    <v-btn color="warning" @click="resetValidation">-->
+<!--                        Reset Validation-->
+<!--                    </v-btn>-->
+                </v-form>
+                <v-form ref="form" v-model="valid" :lazy-validation="false" v-if="formType === 'signup'">
+                    <v-text-field v-model="email" :rules="emailRules" label="E-mail" :type="'email'" required></v-text-field>
+                    <v-text-field v-model="password" :rules="passwordRules" label="Password" :type="'password'" autocomplete="off" required></v-text-field>
                     <v-text-field v-model="name" :counter="64" :rules="nameRules" label="Name" required></v-text-field>
 
-                    <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+                    <!--                    <v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required></v-select>-->
 
-                    <v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required></v-select>
+                    <v-checkbox v-model="checkbox" label="Remember me"></v-checkbox>
 
-                    <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?" required></v-checkbox>
-
-                    <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
-                        Validate
+                    <v-btn :disabled="!valid" color="success" class="mr-4" @click="login">
+                        Sign Up
                     </v-btn>
 
-                    <v-btn color="error" class="mr-4" @click="reset">
-                        Reset Form
+                    <v-btn color="primary" class="mr-4" @click="switchFormTo('login')">
+                        Login
                     </v-btn>
 
-                    <v-btn color="warning" @click="resetValidation">
-                        Reset Validation
-                    </v-btn>
+                    <!--                    <v-btn color="error" class="mr-4" @click="reset">-->
+                    <!--                        Reset Form-->
+                    <!--                    </v-btn>-->
+
+                    <!--                    <v-btn color="warning" @click="resetValidation">-->
+                    <!--                        Reset Validation-->
+                    <!--                    </v-btn>-->
                 </v-form>
             </v-layout>
         </v-container>
@@ -33,7 +62,8 @@
 export default {
     name: "LoginForm",
     data: () => ({
-        valid: true,
+        formType: 'login',
+        valid: false,
         name: '',
         nameRules: [
             v => !!v || 'Name is required',
@@ -44,28 +74,39 @@ export default {
             v => !!v || 'E-mail is required',
             v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
-        select: null,
-        items: [
-            'Item 1',
-            'Item 2',
-            'Item 3',
-            'Item 4',
+        password: '',
+        passwordRules: [
+            v => !!v || 'Password is required'
         ],
-        checkbox: false,
+        // select: null,
+        // items: [
+        //     'Item 1',
+        //     'Item 2',
+        //     'Item 3',
+        //     'Item 4',
+        // ],
+        checkbox: true,
     }),
 
     methods: {
-        validate () {
+        login() {
             if (this.$refs.form.validate()) {
-                this.snackbar = true
+                this.$store.dispatch('login').then(resp => {
+                    console.log(resp);
+                })
             }
         },
-        reset () {
-            this.$refs.form.reset()
-        },
-        resetValidation () {
-            this.$refs.form.resetValidation()
-        },
+        switchFormTo(type) {
+            this.$refs.form.reset();
+            this.$refs.form.resetValidation();
+            this.formType = type;
+        }
+        // reset () {
+        //     this.$refs.form.reset()
+        // },
+        // resetValidation () {
+        //     this.$refs.form.resetValidation()
+        // },
     },
 }
 </script>
