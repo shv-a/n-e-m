@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 MongoClient.connect(db.url2, (err, database) => {
     if (err) return console.log('===error===', err);
 
-    const db = database.db('notes');
+    const db = database.db('pasta');
     require('./app/routes')(app, db);
 
     app.listen(port, () => {
