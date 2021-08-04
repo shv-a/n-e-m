@@ -21,16 +21,13 @@ export default {
     toggleSidebar(state) {
         state.sidebarMinimized = !state.sidebarMinimized;
     },
-    bookingFullscreen(state) {
-        state.fullscreenModeOn = !state.fullscreenModeOn;
-    },
-    itemToEdit(state, item) {
-        state.itemToEdit = item
-    },
-    reservesFromApp(state, items) {
-        state.reservesFromAppCounter = typeof items === 'object' ? items.length : 0
-    },
-    restaurantSpaces(state, items) {
-        state.restaurantSpaces = items
+    showServerMessage(state, message) {
+        const messageId = Date.now();
+        message.id = messageId;
+        state.messages.push(message);
+        setTimeout(() => {
+            state.messages.splice(state.messages.findIndex( message => message.id === messageId ))
+        }, 3000)
+
     }
 }

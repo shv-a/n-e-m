@@ -1,7 +1,7 @@
-let ObjectID = require('mongodb').ObjectID;
+const ObjectID = require('mongodb').ObjectID;
 
 module.exports = function(app, db) {
-    app.get('/notes/:id', (req, res) => {
+    app.get('/pasta/:id', (req, res) => {
         const id = req.params.id;
         const details = { '_id': new ObjectID(id) };
         db.collection('pasta').findOne(details, (err, item) => {
@@ -14,19 +14,38 @@ module.exports = function(app, db) {
             }
         });
     });
-    app.post('/notes', (req, res) => {
-        const note = { text: req.body.body, title: req.body.title };
-        db.collection('pasta').insertOne(note, (err, result) => {
+    app.get('/pasta', (req, res) => {
+        console.log('============================================================');
+        console.log('get /pasta');
+        db.collection('pasta').find({}, (err, item) => {
+            if (err) {
+                console.log(item);
+                res.send({'error': err});
+            } else {
+
+                console.log('--------------------item');
+                console.log(item);
+                res.send(item); //todo
+            }
+        });
+    });
+    app.post('/pasta', (req, res) => {
+        console.log('============================================================');
+        console.log('post /pasta');
+        console.log(req.body);
+        const pasta = { text: req.body.body, title: req.body.title, tags: req.body.tags };
+        db.collection('pasta').insertOne(pasta, (err, result) => {
             if (err) {
                 console.log(result);
                 res.send({'error': err});
             } else {
+                console.log('++++++++++++++++++++result++++++++++++++++++++');
                 console.log(result);
-                res.send(result.ops[0]);
+                res.send(result);
             }
         });
     });
-    app.delete('/notes/:id', (req, res) => {
+    app.delete('/pasta/:id', (req, res) => {
         const id = req.params.id;
         const details = { '_id': new ObjectID(id) };
         db.collection('pasta').remove(details, (err, item) => {
@@ -39,7 +58,7 @@ module.exports = function(app, db) {
             }
         });
     });
-    app.put ('/notes/:id', (req, res) => {
+    app.put ('/pasta/:id', (req, res) => {
         const id = req.params.id;
         const details = { '_id': new ObjectID(id) };
         const note = { text: req.body.body, title: req.body.title };

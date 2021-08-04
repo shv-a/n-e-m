@@ -44,6 +44,37 @@ export default {
             resolve()
         })
     },
+    postPasta(store, pasta) {
+        return new Promise((resolve, reject) => {
+            axios.post(apiUrls.pasta.post, pasta)
+                .then(resp => {
+                    if (resp.status === 200) {
+                        resolve(resp)
+                    } else {
+                        reject(resp)
+                    }
+                })
+                .catch(err => {
+                    reject(err);
+                })
+        });
+    },
+    getPasta() {
+        return new Promise((resolve, reject) => {
+            axios.get(apiUrls.pasta.getAll)
+                .then(resp => {
+                    if (resp.status === 200) {
+                        resolve(resp)
+                    } else {
+                        reject(resp)
+                    }
+                })
+                .catch(err => {
+                    reject(err);
+                })
+        });
+    },
+
     getDataList({ commit, state }, dataListKey) {
         return new Promise((resolve, reject) => {
             if (state[dataListKey]) {

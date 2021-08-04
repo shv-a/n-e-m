@@ -1,6 +1,6 @@
 const env = {
-    'production': 'http://queen.bigdig.com.ua/api',
-    'development': 'http://queen.bigdig.com.ua/api'
+    'production': 'http://localhost:8000',
+    'development': 'http://localhost:8000'
 };
 
 const apiUrls = {
@@ -17,7 +17,14 @@ const apiUrls = {
     tablePreset: '/table_presets',
     tablesForDate: '/tables_for_date',
     booking: '/booking',
-    reserveFromApp: '/reserves'
+    reserveFromApp: '/reserves',
+
+
+    pasta: {
+        post: '/pasta',
+        get: '/pasta/:id',
+        getAll: '/pasta',
+    }
 };
 
 const keys = {
