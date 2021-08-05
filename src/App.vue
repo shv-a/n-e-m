@@ -14,13 +14,11 @@
 <script>
 import LoginForm from "@/components/Login/LoginForm";
 import {mapGetters} from 'vuex';
-// import Messages from "@/components/Messages/Messages";
 
 export default {
     name: 'App',
     components: {
-        LoginForm,
-        // Messages
+        LoginForm
     },
     computed: {
         ...mapGetters(['isLoggedIn'])

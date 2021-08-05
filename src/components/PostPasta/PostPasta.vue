@@ -1,5 +1,8 @@
 <template>
-    <v-row align="center">
+    <v-row align="center" class="post-pasta">
+        <v-layout align-center justify-center>
+            <h3>Post Your Pasta</h3>
+        </v-layout>
         <v-container class="fill-height" fluid>
             <v-layout align-center justify-center>
                 <v-form ref="form">
@@ -12,9 +15,6 @@
                     <v-btn color="success" class="mr-4" @click="getPasta">
                         Get Pasta
                     </v-btn>
-                    <v-btn color="warning" class="mr-4" @click="test">
-                        Test
-                    </v-btn>
                 </v-form>
             </v-layout>
         </v-container>
@@ -26,9 +26,9 @@ export default {
     name: "LoginForm",
     data: () => ({
         valid: false,
-        title: 'TestPasta1',
-        body: 'TestPasta1 text TestPasta1 text TestPasta1 text TestPasta1 text TestPasta1 text TestPasta1 text TestPasta1 text TestPasta1 text TestPasta1 text TestPasta1 text ',
-        tags: 'tag test testtag',
+        title: '',
+        body: '',
+        tags: '',
         titleRules: [
             v => !!v || 'Title is required',
             v => (v && v.length <= 64) || 'Title must be less than 64 characters',
@@ -69,20 +69,6 @@ export default {
                 console.log(resp);
             })
         },
-        test() {
-            this.flashMessage.show({
-                status: 'error',
-                title: 'Error Message Title',
-                message: 'Oh, you broke my heart! Shame on you!',
-                time: 2000,
-                position: 'right bottom',
-                icon: '/error.png'
-
-            });
-
-
-            this.$http.get('/apitest').then(resp => {console.log(resp)});
-        },
         switchFormTo(type) {
             this.$refs.form.reset();
             this.$refs.form.resetValidation();
@@ -91,3 +77,9 @@ export default {
     },
 }
 </script>
+
+<style>
+.post-pasta {
+    margin-top: auto;
+}
+</style>
