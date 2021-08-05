@@ -17,15 +17,11 @@ module.exports = function(app, db) {
     app.get('/pasta', (req, res) => {
         console.log('============================================================');
         console.log('get /pasta');
-        db.collection('pasta').find({}, (err, item) => {
+        db.collection('pasta').find({}).toArray((err, results) => {
             if (err) {
-                console.log(item);
                 res.send({'error': err});
             } else {
-
-                console.log('--------------------item');
-                console.log(item);
-                res.send(item); //todo
+                res.send(results);
             }
         });
     });
